@@ -50,6 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
         fields.put("username",String.valueOf(etUsername.getText()));
         fields.put("password",String.valueOf(etPassword.getText()));
 
+
 //        if( fields.isEmpty() ) {
 //            Toast.makeText(this,"No field should be empty",Toast.LENGTH_SHORT).show();
 //        }else {
