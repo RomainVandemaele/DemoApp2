@@ -90,8 +90,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private static final int REQUEST_CODE_CHOICE_BUTTON = 1;
-    private static final int RESULT_VALIDATED = 2;
-    private static final int RESULT_CANCELLED = 3;
+//    private static final int RESULT_VALIDATED = 2;
+//    private static final int RESULT_CANCELLED = 3;
 
 
     @Override
@@ -101,10 +101,10 @@ public class MainActivity extends AppCompatActivity {
         switch (requestCode) {
             case REQUEST_CODE_CHOICE_BUTTON :
                 switch (resultCode) {
-                    case RESULT_VALIDATED :
+                    case R.integer.RESULT_VALIDATED:
                         Toast.makeText(this,"Validated",Toast.LENGTH_SHORT).show();
                         break;
-                    case RESULT_CANCELLED :
+                    case R.integer.RESULT_CANCELLED:
                         Toast.makeText(this,"Cancelled",Toast.LENGTH_SHORT).show();
                         break;
                 }

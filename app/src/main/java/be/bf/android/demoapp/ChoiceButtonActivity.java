@@ -11,8 +11,8 @@ public class ChoiceButtonActivity extends AppCompatActivity {
     private Button btnValidate;
     private Button btnCancelled;
 
-    private static final int RESULT_VALIDATED = 2;
-    private static final int RESULT_CANCELLED = 3;
+//    private static final int RESULT_VALIDATED = 2;
+//    private static final int RESULT_CANCELLED = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,12 +26,12 @@ public class ChoiceButtonActivity extends AppCompatActivity {
     }
 
     public void  clickCancel(View view) {
-        setResult(RESULT_CANCELLED);
+        setResult(R.integer.RESULT_CANCELLED);
         finish();
     }
 
     public void  clickValidate(View view) {
-        setResult(RESULT_VALIDATED);
+        setResult(R.integer.RESULT_VALIDATED);
         finish();
     }
 }

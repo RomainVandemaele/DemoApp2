@@ -27,17 +27,17 @@ public class LogInForm implements FormModel{
             this.password = password;
         }
 
-        public boolean isValid() {
-            if (username == null) return false;
-            if (username.equals("")) return false;
-
-            if (password == null) return false;
-            if (password.equals("")) return false;
-            if (password.length() < 4) return false;
-            if (password.length() > 12) return false;
-
-            return true;
-        }
+//        public boolean isValid() {
+//            if (username == null) return false;
+//            if (username.equals("")) return false;
+//
+//            if (password == null) return false;
+//            if (password.equals("")) return false;
+//            if (password.length() < 4) return false;
+//            if (password.length() > 12) return false;
+//
+//            return true;
+//        }
 }
 
 

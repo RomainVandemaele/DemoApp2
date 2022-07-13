@@ -67,24 +67,24 @@ public class RegisterForm implements FormModel {
         return this;
     }
 
-    public boolean isValid() {
-        if (firstName == null) return false;
-        if (firstName.equals("")) return false;
-
-        if (lastName == null) return false;
-        if (lastName.equals("")) return false;
-
-
-        if (birthDate == null) return false;
-        if (birthDate.equals("")) return false;
-        //if(!birthDate.matches("../../....")) return false;
-
-        if (password == null) return false;
-        if (password.equals("")) return false;
-        if (password.length() < 4) return false;
-        if (password.length() > 12) return false;
-
-        return true;
-    }
+//    public boolean isValid() {
+//        if (firstName == null) return false;
+//        if (firstName.equals("")) return false;
+//
+//        if (lastName == null) return false;
+//        if (lastName.equals("")) return false;
+//
+//
+//        if (birthDate == null) return false;
+//        if (birthDate.equals("")) return false;
+//        //if(!birthDate.matches("../../....")) return false;
+//
+//        if (password == null) return false;
+//        if (password.equals("")) return false;
+//        if (password.length() < 4) return false;
+//        if (password.length() > 12) return false;
+//
+//        return true;
+//    }
 
 }
