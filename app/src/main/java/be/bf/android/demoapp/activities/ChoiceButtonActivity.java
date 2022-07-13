@@ -1,10 +1,12 @@
-package be.bf.android.demoapp;
+package be.bf.android.demoapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import be.bf.android.demoapp.R;
 
 public class ChoiceButtonActivity extends AppCompatActivity {
 

@@ -14,4 +14,6 @@
     <string name="btn_main_goChoice">Choose</string>
     <string name="btn_choiceButton_validate">Validate</string>
     <string name="btn_choiceButton_cancel">Cancel</string>
+    <string name="main_displayExtra">Extra</string>
+    <string name="main_extra">EXTRA</string>
 </resources>

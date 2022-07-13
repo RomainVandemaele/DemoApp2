@@ -16,7 +16,7 @@ public interface FormModel {
         for (Field field : fields) {
             field.setAccessible(true);
             for (Annotation annotation : field.getDeclaredAnnotations()) {
-                BiFunction<Object,Field,Boolean> resolver = ValidatorResolver.findByAnnotation(annotation.getClass());
+                BiFunction<Object,Field,Boolean> resolver = ValidatorResolver.findByAnnotation(annotation);
                 if(!resolver.apply(this,field)) {
                     return false;
                 }

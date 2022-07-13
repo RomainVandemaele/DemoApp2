@@ -1,5 +1,6 @@
 package be.bf.android.demoapp.models;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.function.BiFunction;
 
@@ -17,10 +18,10 @@ public enum ValidatorResolver {
         this.validator = validator;
     }
 
-    public static BiFunction<Object,Field,Boolean> findByAnnotation(Class<?> annotation) {
-        for(ValidatorResolver value : ValidatorResolver.values()) {
-            if (value.annotation.equals(annotation) ) {
-                return value.validator;
+    public static BiFunction<Object,Field,Boolean> findByAnnotation(Annotation annotation) {
+        for(ValidatorResolver resolver : ValidatorResolver.values()) {
+            if (resolver.annotation.equals(annotation.annotationType()) ) {
+                return resolver.validator;
             }
         }
         return null;

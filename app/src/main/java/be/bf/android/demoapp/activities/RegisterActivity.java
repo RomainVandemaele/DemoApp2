@@ -1,4 +1,4 @@
-package be.bf.android.demoapp;
+package be.bf.android.demoapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,6 +13,7 @@ import android.widget.Toast;
 import java.util.HashMap;
 import java.util.Map;
 
+import be.bf.android.demoapp.R;
 import be.bf.android.demoapp.models.RegisterForm;
 
 public class RegisterActivity extends AppCompatActivity {
