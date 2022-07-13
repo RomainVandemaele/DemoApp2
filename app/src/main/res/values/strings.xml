@@ -11,4 +11,7 @@
     <string name="reset">Reset</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
+    <string name="btn_main_goChoice">Choose</string>
+    <string name="btn_choiceButton_validate">Validate</string>
+    <string name="btn_choiceButton_cancel">Cancel</string>
 </resources>

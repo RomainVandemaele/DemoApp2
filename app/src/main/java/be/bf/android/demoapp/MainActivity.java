@@ -1,21 +1,29 @@
 package be.bf.android.demoapp;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
+
+import be.bf.android.demoapp.utils.Code;
+
 public class MainActivity extends AppCompatActivity {
 
     private TextView tvHello;
     private Button btnLogin;
     private Button btnRegister;
+    private Button btnGoChoice;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(this::goLogin);
         btnRegister = findViewById(R.id.button_register);
         btnRegister.setOnClickListener(this::goRegister);
+        btnGoChoice = findViewById(R.id.button_GoChoice);
+        btnGoChoice.setOnClickListener(this::goChoice);
     }
 
     @Override
@@ -79,10 +89,33 @@ public class MainActivity extends AppCompatActivity {
         MainActivity.this.startActivity(loginIntent);
     }
 
+    private static final int REQUEST_CODE_CHOICE_BUTTON = 1;
+    private static final int RESULT_VALIDATED = 2;
+    private static final int RESULT_CANCELLED = 3;
 
-    public void changeText(View view) {
-        tvHello.setText(getResources().getString(R.string.app_name));
-        Intent myIntent = new Intent(MainActivity.this,RegisterActivity.class);
-        MainActivity.this.startActivity(myIntent);
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //getResources().getInteger(R.code)
+        switch (requestCode) {
+            case REQUEST_CODE_CHOICE_BUTTON :
+                switch (resultCode) {
+                    case RESULT_VALIDATED :
+                        Toast.makeText(this,"Validated",Toast.LENGTH_SHORT).show();
+                        break;
+                    case RESULT_CANCELLED :
+                        Toast.makeText(this,"Cancelled",Toast.LENGTH_SHORT).show();
+                        break;
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void goChoice(View view) {
+        Intent myIntent = new Intent(MainActivity.this,ChoiceButtonActivity.class);
+        MainActivity.this.startActivityForResult(myIntent,REQUEST_CODE_CHOICE_BUTTON );
     }
 }

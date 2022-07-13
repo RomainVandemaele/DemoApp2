@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import be.bf.android.demoapp.models.SignInForm;
+import be.bf.android.demoapp.models.LogInForm;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -38,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     public void login(View view) {
         String username = etUsername.getText().toString();
         String password = etPassword.getText().toString();
-        SignInForm form = new SignInForm(etUsername.getText().toString(), etPassword.getText().toString());
+        LogInForm form = new LogInForm(etUsername.getText().toString(), etPassword.getText().toString());
 
         if(form.isValid() ){
             Toast.makeText(this,"Welcome "+form.getUsername(),Toast.LENGTH_SHORT).show();

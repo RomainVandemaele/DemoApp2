@@ -21,7 +21,6 @@
     <!--            android:text="@string/understood"/>-->
 
 
-
     <!--        <ImageView-->
     <!--            android:id="@+id/imageView3"-->
     <!--            android:layout_width="wrap_content"-->
@@ -61,10 +60,10 @@
         app:srcCompat="@android:drawable/btn_star_big_on" />
 
     <!--    <EditText-->
-<!--        android:id="@+id/et_username"-->
-<!--        android:inputType="textPassword"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"/>-->
+    <!--        android:id="@+id/et_username"-->
+    <!--        android:inputType="textPassword"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"/>-->
 
     <Button
         android:id="@+id/button_login"
@@ -90,6 +89,19 @@
         android:text="@string/register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_GoChoice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="226dp"
+        android:text="@string/btn_main_goChoice"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_register"
+        app:layout_constraintVertical_bias="0.846" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

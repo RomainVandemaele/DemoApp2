@@ -2,6 +2,7 @@ package be.bf.android.demoapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +12,8 @@ import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import be.bf.android.demoapp.models.RegisterForm;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -28,37 +31,48 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
         etFirstName = findViewById(R.id.textEdit_firstName);
         etLastName = findViewById(R.id.textEdit_lastName);
         etBirthDate = findViewById(R.id.textEdit_birthday);
         etUsername = findViewById(R.id.textEdit_username);
         etPassword = findViewById(R.id.textEdit_password);
 
-        btnRegister = findViewById(R.id.button_register);
+        btnRegister = findViewById(R.id.button_register_register);
         btnRegister.setOnClickListener(this::register);
-        btnReset = findViewById(R.id.button_reset);
+        btnReset = findViewById(R.id.button_register_reset);
         btnReset.setOnClickListener(this::reset);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+
 
     public void register(View view) {
+        Log.d("TEST","REGISTER");
         Map<String,String> fields = new HashMap<>();
         fields.put("firstName",String.valueOf(etFirstName.getText()));
         fields.put("lastName",String.valueOf(etLastName.getText()));
-        fields.put("birthday",String.valueOf(etBirthDate.getText()));
+        fields.put("birthdate",String.valueOf(etBirthDate.getText()));
         fields.put("username",String.valueOf(etUsername.getText()));
         fields.put("password",String.valueOf(etPassword.getText()));
 
+        RegisterForm form = new RegisterForm();
+        form.setFirstName(fields.get("firstName"))
+            .setLastName(fields.get("lastName"))
+            .setBirthDate(fields.get("birthdate"))
+            .setUsername(fields.get("username"))
+            .setPassword(fields.get("password"));
 
 
-//        if( fields.isEmpty() ) {
-//            Toast.makeText(this,"No field should be empty",Toast.LENGTH_SHORT).show();
-//        }else {
-//            Toast.makeText(this,"Welcome "+username,Toast.LENGTH_SHORT).show();
-//            Log.d("username", username );
-//            Log.d("password", password);
-//        }
+        if(form.isValid() ){
+            Toast.makeText(this,"You are now registered "+form.getUsername(),Toast.LENGTH_LONG).show();
+            //RegisterActivity.this.startActivity(new Intent(RegisterActivity.this,MainActivity.class));
+        }else {
+            Toast.makeText(this,"Register refused",Toast.LENGTH_LONG).show();
+        }
 
     }
 

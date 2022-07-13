@@ -1,11 +1,12 @@
 package be.bf.android.demoapp.models;
 
-public class SignInForm {
+public class LogInForm implements FormModel{
+    @Required @MinLength(size = 4)
+    private String username;
+    @Required @MinLength(size = 4)
+    private String password;
 
-        private String username;
-        private String password;
-
-        public SignInForm(String username,String password) {
+        public LogInForm(String username, String password) {
             this.setUsername(username);
             this.setPassword(password);
         }
