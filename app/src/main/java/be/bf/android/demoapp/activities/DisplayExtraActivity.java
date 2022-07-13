@@ -15,15 +15,13 @@ public class DisplayExtraActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_display_extra);
         binding = ActivityDisplayExtraBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         Bundle extra = this.getIntent().getExtras();
         if(extra != null) {
-            Log.d("EXTRA",extra.getString("text"));
+            //Log.d("EXTRA",extra.getString("text"));
             binding.tvExtraDisplay.setText(extra.getString("text").toString());
         }
-
     }
 }
