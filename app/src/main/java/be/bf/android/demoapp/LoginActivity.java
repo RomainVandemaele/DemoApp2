@@ -3,11 +3,12 @@ package be.bf.android.demoapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import be.bf.android.demoapp.models.SignInForm;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -35,16 +36,14 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void login(View view) {
-        String username = String.valueOf(etUsername.getText());
-        String password = String.valueOf(etPassword.getText());
-        if(username.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this,"No field should be empty",Toast.LENGTH_SHORT).show();
-        }else if(password.length() < 4) {
-            Toast.makeText(this,"Password must be at least 4 characters",Toast.LENGTH_SHORT).show();
+        String username = etUsername.getText().toString();
+        String password = etPassword.getText().toString();
+        SignInForm form = new SignInForm(etUsername.getText().toString(), etPassword.getText().toString());
+
+        if(form.isValid() ){
+            Toast.makeText(this,"Welcome "+form.getUsername(),Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this,"Welcome "+username,Toast.LENGTH_SHORT).show();
-            Log.d("username", username );
-            Log.d("password", password);
+            Toast.makeText(this,"Connexion refused",Toast.LENGTH_SHORT).show();
         }
     }
 

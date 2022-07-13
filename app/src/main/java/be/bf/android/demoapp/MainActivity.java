@@ -14,7 +14,8 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     private TextView tvHello;
-    private Button btn;
+    private Button btnLogin;
+    private Button btnRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,16 +32,10 @@ public class MainActivity extends AppCompatActivity {
 
         tvHello = findViewById(R.id.textView);
         tvHello.setText("Blop");
-        btn = findViewById(R.id.button);
-
-        //Listener 1 emetteur 1 ecoutant != observable
-        btn.setOnClickListener( (View v) -> {
-            Log.d("click","ON CLICK");
-        } );
-
-        btn.setOnClickListener(this::changeText);
-
-
+        btnLogin = findViewById(R.id.button_login);
+        btnLogin.setOnClickListener(this::goLogin);
+        btnRegister = findViewById(R.id.button_register);
+        btnRegister.setOnClickListener(this::goRegister);
     }
 
     @Override
@@ -72,6 +67,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         Log.d("LIFECYCLE","ON_DESTROY");
+    }
+
+    public void goLogin(View view) {
+        Intent loginIntent = new Intent(MainActivity.this,LoginActivity.class);
+        MainActivity.this.startActivity(loginIntent);
+    }
+
+    public void goRegister(View view) {
+        Intent loginIntent = new Intent(MainActivity.this,RegisterActivity.class);
+        MainActivity.this.startActivity(loginIntent);
     }
 
 
