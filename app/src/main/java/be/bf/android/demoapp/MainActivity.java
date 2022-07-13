@@ -1,5 +1,9 @@
 package be.bf.android.demoapp;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -29,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_CHOICE_BUTTON = 101;
 
+    private ActivityResultLauncher<Intent> exLauncher;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +61,11 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         binding.buttonGoChoice.setOnClickListener(this::goChoice);
+
+        exLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),this::exResult);
     }
+
+
 
     @Override
     protected void onStart() {
@@ -100,29 +110,33 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        //getResources().getInteger(R.code)
+//        switch (requestCode) {
+//            case MainActivity.REQUEST_CODE_CHOICE_BUTTON :
+//                switch (resultCode) {
+//                    case R.integer.RESULT_VALIDATED:
+//                        Toast.makeText(this,"Validated",Toast.LENGTH_SHORT).show();
+//                        break;
+//                    case R.integer.RESULT_CANCELLED:
+//                        Toast.makeText(this,"Cancelled",Toast.LENGTH_SHORT).show();
+//                        break;
+//                }
+//                break;
+//            default:
+//                break;
+//        }
+//    }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        //getResources().getInteger(R.code)
-        switch (requestCode) {
-            case MainActivity.REQUEST_CODE_CHOICE_BUTTON :
-                switch (resultCode) {
-                    case R.integer.RESULT_VALIDATED:
-                        Toast.makeText(this,"Validated",Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.integer.RESULT_CANCELLED:
-                        Toast.makeText(this,"Cancelled",Toast.LENGTH_SHORT).show();
-                        break;
-                }
-                break;
-            default:
-                break;
-        }
+    public void exResult(ActivityResult result) {
+        //result as all data, requestCode
     }
 
     public void goChoice(View view) {
         Intent myIntent = new Intent(MainActivity.this,ChoiceButtonActivity.class);
         MainActivity.this.startActivityForResult(myIntent,MainActivity.REQUEST_CODE_CHOICE_BUTTON );
+        exLauncher.launch(myIntent);
     }
 }
