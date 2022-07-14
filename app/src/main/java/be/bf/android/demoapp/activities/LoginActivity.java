@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -56,7 +57,11 @@ public class LoginActivity extends AppCompatActivity {
         LogInForm form = new LogInForm(username, password);
 
         if(form.isValid() ){
-            Toast.makeText(this,"Welcome "+form.getUsername(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this,"Welcome "+form.getUsername(),Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(LoginActivity.this,LoggedInActivity.class);
+            intent.putExtra("username",username);
+            intent.putExtra("password",password);
+            startActivity(intent);
         } else {
             Toast.makeText(this,"Connexion refused",Toast.LENGTH_SHORT).show();
         }

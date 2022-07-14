@@ -3,6 +3,7 @@ package be.bf.android.demoapp;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Application;
@@ -12,6 +13,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import be.bf.android.demoapp.activities.ChoiceButtonActivity;
 import be.bf.android.demoapp.activities.DisplayExtraActivity;
@@ -84,14 +88,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void ex1Result(ActivityResult result) {
-        Log.d("MainActivity", "exo1Result: " + result);
+        //Log.d("MainActivity", "exo1Result: " + result);
+
         //result as all data, requestCode
     }
 
     public void goChoice(View view) {
         Intent myIntent = new Intent(MainActivity.this, ChoiceButtonActivity.class);
-        //MainActivity.this.startActivityForResult(myIntent,MainActivity.REQUEST_CODE_CHOICE_BUTTON );
-        exLauncher.launch(myIntent);
+        MainActivity.this.startActivityForResult(myIntent,MainActivity.REQUEST_CODE_CHOICE_BUTTON );
+        //exLauncher.launch(myIntent);
     }
 
     @Override
@@ -126,25 +131,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        //getResources().getInteger(R.code)
-//        switch (requestCode) {
-//            case MainActivity.REQUEST_CODE_CHOICE_BUTTON :
-//                switch (resultCode) {
-//                    case R.integer.RESULT_VALIDATED:
-//                        Toast.makeText(this,"Validated",Toast.LENGTH_SHORT).show();
-//                        break;
-//                    case R.integer.RESULT_CANCELLED:
-//                        Toast.makeText(this,"Cancelled",Toast.LENGTH_SHORT).show();
-//                        break;
-//                }
-//                break;
-//            default:
-//                break;
-//        }
-//    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //getResources().getInteger(R.code)
+        switch (requestCode) {
+            case MainActivity.REQUEST_CODE_CHOICE_BUTTON :
+                switch (resultCode) {
+                    case R.integer.RESULT_VALIDATED:
+                        //Snackbar bar = Snackbar.make( binding.layMainGlobal ,"Validated",Snackbar.LENGTH_LONG);
+                        Toast.makeText(this,"Validated",Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.integer.RESULT_CANCELLED:
+                        Toast.makeText(this,"Cancelled",Toast.LENGTH_SHORT).show();
+                        break;
+                }
+                break;
+            default:
+                break;
+        }
+    }
 
 
 }
