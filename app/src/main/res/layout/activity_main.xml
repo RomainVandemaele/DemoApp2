@@ -97,6 +97,7 @@
         android:layout_width="134dp"
         android:layout_height="45dp"
         android:hint="@string/main_extra"
+        android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -123,6 +124,28 @@
         app:layout_constraintBottom_toBottomOf="@+id/button_GoChoice"
         app:layout_constraintEnd_toEndOf="@+id/button_register"
         app:layout_constraintTop_toTopOf="@+id/button_GoChoice" />
+
+    <Button
+        android:id="@+id/btn_main_call"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:text="@string/call"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="@+id/button_GoChoice"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/button_GoChoice" />
+
+    <Button
+        android:id="@+id/btn_main_search"
+        android:layout_width="107dp"
+        android:layout_height="48dp"
+        android:text="@string/search"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_main_call"
+        app:layout_constraintEnd_toEndOf="@+id/btn_main_go_display_extra"
+        app:layout_constraintHorizontal_bias="0.736"
+        app:layout_constraintStart_toStartOf="@+id/btn_main_go_display_extra"
+        app:layout_constraintTop_toTopOf="@+id/btn_main_call" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

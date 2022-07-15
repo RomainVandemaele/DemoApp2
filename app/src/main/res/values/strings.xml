@@ -16,4 +16,6 @@
     <string name="btn_choiceButton_cancel">Cancel</string>
     <string name="main_displayExtra">Extra</string>
     <string name="main_extra">EXTRA</string>
+    <string name="call">Call</string>
+    <string name="search">search</string>
 </resources>

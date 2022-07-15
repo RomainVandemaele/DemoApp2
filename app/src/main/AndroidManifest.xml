@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="be.bf.android.demoapp">
 
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+
     <application
         android:name=".DemoApplication"
         android:allowBackup="true"
