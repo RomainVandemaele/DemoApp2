@@ -76,8 +76,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("GAME",Application.GAME_SERVICE);
         ( (DemoApplication) getApplication()).getHello();
 
-
-//        btnLogin = findViewById(R.id.button_login);
+        //btnLogin = findViewById(R.id.button_login);
 //        btnLogin.setOnClickListener(this::goLogin);
 //        btnRegister = findViewById(R.id.button_register);
 //        btnRegister.setOnClickListener(this::goRegister);

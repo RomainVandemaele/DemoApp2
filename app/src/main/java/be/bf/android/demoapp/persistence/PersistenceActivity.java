@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import be.bf.android.demoapp.R;
 import be.bf.android.demoapp.configs.Config;
 import be.bf.android.demoapp.databinding.ActivityPersistenceBinding;
@@ -41,7 +43,8 @@ public class PersistenceActivity extends AppCompatActivity {
         super.onResume();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String message = "email : " + preferences.getString(Config.Preferences.EMAIL_PREF_KEY,"you@home.be") + "\n password : " + preferences.getString(Config.Preferences.PASSWORD_PREF_KEY,"password") + "\nchecked : " + preferences.getBoolean(Config.Preferences.CHECKED_PREF_KEY,false);
-        Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
+        Snackbar.make(binding.layoutPersistence,message, Snackbar.LENGTH_SHORT).show();
+        //Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
     }
 
     private void onFileAction(View view) {

@@ -9,12 +9,14 @@ import android.view.View;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -39,32 +41,37 @@ public class FilePersistenceActivity extends AppCompatActivity {
     }
 
     private void onDisplayFileAction(View view) {
+        BufferedReader bufferedReader = null;
         try(FileInputStream fis = openFileInput(this.path)) {
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader((fis)));
+            bufferedReader = new BufferedReader(new InputStreamReader((fis)));
             StringBuilder message = new StringBuilder("File : \n");
             String line;
             while ( (line = bufferedReader.readLine()) != null) {
                 message.append(line);
             }
-            bufferedReader.close();
+            //bufferedReader.close();
             Toast.makeText(this,message.toString(),Toast.LENGTH_LONG).show();
         } catch (FileNotFoundException e) {
             Toast.makeText(this,"file not found",Toast.LENGTH_LONG).show();
             //e.printStackTrace();
         }catch (IOException e) {
             Toast.makeText(this,"IOEXCEPTION " + e.getMessage(),Toast.LENGTH_LONG).show();
+        }finally {
+            bufferedReader.close();
         }
 
     }
 
     private void onSaveFileAction(View view) {
         try(FileOutputStream fos = openFileOutput(this.path,MODE_PRIVATE)) {
+            BufferedWriter bufferedWriter = new BufferedWriter( new OutputStreamWriter(fos));
             fos.write(this.binding.etPersistenceFileText.getText().toString().getBytes());
-            Toast.makeText(this,"File succesfully saved ",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"File successfully saved ",Toast.LENGTH_LONG).show();
+            bufferedWriter.close();
         } catch (FileNotFoundException e) {
             Toast.makeText(this,"file not found",Toast.LENGTH_LONG).show();
         } catch (IOException e) {
-            Toast.makeText(this,"IOEXCEPTION " + e.getMessage(),Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"IOEXCEPTION " + e.getMessage(),Toast.LENGTH_SHORT).show();
             //e.printStackTrace();
         }
     }
@@ -76,7 +83,7 @@ public class FilePersistenceActivity extends AppCompatActivity {
                 Log.d("DELETE", "onDeleteFileAction: EXISTS");
                 Files.deleteIfExists(path);
             }
-            Toast.makeText(this,"File succesfully deleted ",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"File succesfully deleted ",Toast.LENGTH_SHORT).show();
         }catch (Exception e) {
             Toast.makeText(this,"file not found",Toast.LENGTH_LONG).show();
         }
