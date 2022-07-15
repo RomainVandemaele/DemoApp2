@@ -2,6 +2,7 @@ package be.bf.android.demoapp;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -82,6 +83,15 @@ public class MainActivity extends AppCompatActivity {
         //exLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),this::ex1Result);
     }
 
+    private ActivityResultLauncher<String> callLauncher = registerForActivityResult(
+            new ActivityResultContracts.RequestPermission(),
+            (isGranted) -> {
+                if(isGranted) {
+                    this.executeCallPhone();
+                }
+            }
+    );
+
     private void launchSearch() {
         String query = binding.etMainExtra.getText().toString();
         Intent intent = new Intent(Intent.ACTION_SEARCH)
@@ -89,7 +99,6 @@ public class MainActivity extends AppCompatActivity {
         if(intent.resolveActivity(getPackageManager()) != null) {
             MainActivity.this.startActivity(intent);
         }
-
     }
 
     private void search(View view) {
@@ -127,7 +136,8 @@ public class MainActivity extends AppCompatActivity {
 //        }
 
         if(checkCallingPermission(Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_DENIED) {
-            requestPermissions(new String[] {Manifest.permission.CALL_PHONE},REQUEST_CODE_CALL_PERMISSION);
+            callLauncher.launch(Manifest.permission.CALL_PHONE);
+            //requestPermissions(new String[] {Manifest.permission.CALL_PHONE},REQUEST_CODE_CALL_PERMISSION);
         }else {
             this.executeCallPhone();
         }
