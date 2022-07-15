@@ -13,9 +13,11 @@ import android.Manifest;
 import android.app.Application;
 import android.app.SearchManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -30,7 +32,9 @@ import be.bf.android.demoapp.activities.ChoiceButtonActivity;
 import be.bf.android.demoapp.activities.DisplayExtraActivity;
 import be.bf.android.demoapp.activities.LoginActivity;
 import be.bf.android.demoapp.activities.RegisterActivity;
+import be.bf.android.demoapp.configs.Config;
 import be.bf.android.demoapp.databinding.ActivityMainBinding;
+import be.bf.android.demoapp.persistence.PersistenceActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,6 +49,15 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_CALL_PERMISSION = 102;
 
     private ActivityResultLauncher<Intent> exLauncher;
+
+    private ActivityResultLauncher<String> callLauncher = registerForActivityResult(
+            new ActivityResultContracts.RequestPermission(),
+            (isGranted) -> {
+                if(isGranted) {
+                    this.executeCallPhone();
+                }
+            }
+    );
 
 
     @Override
@@ -77,22 +90,25 @@ public class MainActivity extends AppCompatActivity {
         binding.btnMainGoDisplayExtra.setOnClickListener(this::goExtra);
         binding.btnMainCall.setOnClickListener(this::call);
         binding.btnMainSearch.setOnClickListener(this::search);
+        binding.btnMainPersitence.setOnClickListener(this::onPersistenceAction);
 
 
         //On ActivityResult new way
         //exLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),this::ex1Result);
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String message = "email : " + preferences.getString(Config.Preferences.EMAIL_PREF_KEY,"you@home.be") + "\n password : " + preferences.getString(Config.Preferences.PASSWORD_PREF_KEY,"password") + "\nchecked : " + preferences.getBoolean(Config.Preferences.CHECKED_PREF_KEY,false);
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
+        //Log.d("BLOP",preferences.getString("username","blop"));
     }
 
-    private ActivityResultLauncher<String> callLauncher = registerForActivityResult(
-            new ActivityResultContracts.RequestPermission(),
-            (isGranted) -> {
-                if(isGranted) {
-                    this.executeCallPhone();
-                }
-            }
-    );
+    private void onPersistenceAction(View view) {
+        Intent intent = new Intent(MainActivity.this, PersistenceActivity.class);
+        startActivity(intent);
+    }
 
-    private void launchSearch() {
+
+    private void search(View view) {
         String query = binding.etMainExtra.getText().toString();
         Intent intent = new Intent(Intent.ACTION_SEARCH)
                 .putExtra(SearchManager.QUERY,query);
@@ -100,11 +116,6 @@ public class MainActivity extends AppCompatActivity {
             MainActivity.this.startActivity(intent);
         }
     }
-
-    private void search(View view) {
-        launchSearch();
-    }
-
 
 //    public void ex1Result(ActivityResult result) {
 //        Log.d("MainActivity", "exo1Result: " + result);

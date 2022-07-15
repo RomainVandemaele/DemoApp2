@@ -147,5 +147,16 @@
         app:layout_constraintStart_toStartOf="@+id/btn_main_go_display_extra"
         app:layout_constraintTop_toTopOf="@+id/btn_main_call" />
 
+    <Button
+        android:id="@+id/btn_main_persitence"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="44dp"
+        android:text="@string/pesistence"
+        app:layout_constraintBottom_toTopOf="@+id/button_login"
+        app:layout_constraintEnd_toEndOf="@+id/button_login"
+        app:layout_constraintStart_toStartOf="@+id/button_login"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

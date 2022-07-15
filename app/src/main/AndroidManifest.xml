@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="be.bf.android.demoapp">
 
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+<!--    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>-->
 
     <application
         android:name=".DemoApplication"
@@ -16,6 +17,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DemoApp"
         tools:targetApi="31">
+        <activity
+            android:name=".persistence.FilePersistenceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".persistence.SharedPreferenceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".persistence.PersistenceActivity"
+            android:exported="false" />
         <activity
             android:name=".activities.LoggedInActivity"
             android:exported="false" />
