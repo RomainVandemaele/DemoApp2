@@ -56,10 +56,7 @@ public class FilePersistenceActivity extends AppCompatActivity {
             //e.printStackTrace();
         }catch (IOException e) {
             Toast.makeText(this,"IOEXCEPTION " + e.getMessage(),Toast.LENGTH_LONG).show();
-        }finally {
-            bufferedReader.close();
         }
-
     }
 
     private void onSaveFileAction(View view) {
