@@ -2,24 +2,35 @@
 package be.bf.android.demoapp.persistence;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.List;
+
 import be.bf.android.demoapp.R;
 import be.bf.android.demoapp.configs.Config;
 import be.bf.android.demoapp.databinding.ActivityPersistenceBinding;
+import be.bf.android.demoapp.persistence.DAO.UserDAO;
+import be.bf.android.demoapp.persistence.entities.User;
+import be.bf.android.demoapp.persistence.threads.DatabaseThread;
+import io.reactivex.rxjava3.core.Single;
+
+import static be.bf.android.demoapp.configs.Config.DBLite;
 
 public class PersistenceActivity extends AppCompatActivity {
 
     ActivityPersistenceBinding binding;
+    private AppDatabase appDB;
 
 
     @Override
@@ -36,7 +47,25 @@ public class PersistenceActivity extends AppCompatActivity {
 
         binding.btnPersistenceSharedPref.setOnClickListener(this::onSharedPrefAction);
         binding.btnPersistenceFile.setOnClickListener(this::onFileAction);
+
+        //getApplicationContext().getApplicationContext().deleteDatabase(DBLite.DB_NAME);
+        this.appDB = Room.databaseBuilder(getApplicationContext(),AppDatabase.class, DBLite.DB_NAME).build();
+        UserDAO userDAO = this.appDB.userDAO();
+        User user = new User("Romain","Vandemale");
+        userDAO.insertAll(user);
+
+        //DatabaseThread thread = new DatabaseThread();
+        //thread.setDao(userDAO);
+        //thread.start();
+
+        //userDAO.insertAll(user);
+        Single<List<User>> users = userDAO.getAll();
+        List<User> userlist = users.blockingGet();
+        Log.d("YEP", String.valueOf(userlist.size()));
+
     }
+
+
 
     @Override
     protected void onResume() {

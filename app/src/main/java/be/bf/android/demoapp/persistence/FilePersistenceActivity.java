@@ -2,11 +2,14 @@ package be.bf.android.demoapp.persistence;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -23,11 +26,12 @@ import java.nio.file.Paths;
 
 import be.bf.android.demoapp.R;
 import be.bf.android.demoapp.databinding.ActivityFilePersistenceBinding;
+import be.bf.android.demoapp.configs.Config.FilePaths;
 
 public class FilePersistenceActivity extends AppCompatActivity {
 
     private ActivityFilePersistenceBinding binding;
-    private final String path = "text.txt";
+    private final String path = FilePaths.FILE_DEMO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +53,9 @@ public class FilePersistenceActivity extends AppCompatActivity {
             while ( (line = bufferedReader.readLine()) != null) {
                 message.append(line);
             }
-            //bufferedReader.close();
-            Toast.makeText(this,message.toString(),Toast.LENGTH_LONG).show();
+            bufferedReader.close();
+            Snackbar.make(binding.gridLayoutEmail,message.toString(),Snackbar.LENGTH_SHORT).setTextColor(Color.GREEN).show();
+            //Toast.makeText(this,message.toString(),Toast.LENGTH_LONG).show();
         } catch (FileNotFoundException e) {
             Toast.makeText(this,"file not found",Toast.LENGTH_LONG).show();
             //e.printStackTrace();
@@ -79,8 +84,11 @@ public class FilePersistenceActivity extends AppCompatActivity {
             if (Files.exists(Paths.get(getFilesDir()+ "/"+this.path))) {
                 Log.d("DELETE", "onDeleteFileAction: EXISTS");
                 Files.deleteIfExists(path);
+                Toast.makeText(this,"File succesfully deleted",Toast.LENGTH_SHORT).show();
+            }else {
+                Toast.makeText(this,"File doesn't exist",Toast.LENGTH_SHORT).show();
             }
-            Toast.makeText(this,"File succesfully deleted ",Toast.LENGTH_SHORT).show();
+
         }catch (Exception e) {
             Toast.makeText(this,"file not found",Toast.LENGTH_LONG).show();
         }
