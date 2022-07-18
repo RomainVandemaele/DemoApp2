@@ -10,16 +10,15 @@ import android.view.View;
 import android.widget.Toast;
 
 import be.bf.android.demoapp.R;
+import be.bf.android.demoapp.configs.Config.Preferences;
 import be.bf.android.demoapp.databinding.ActivitySharedPreferenceBinding;
 
-import static be.bf.android.demoapp.configs.Config.Preferences;
+
 
 public class SharedPreferenceActivity extends AppCompatActivity {
 
     private ActivitySharedPreferenceBinding binding;
-//    private final String EMAIL_PREF_KEY = "email";
-//    private final String PASSWORD_PREF_KEY = "password";
-//    private final String CHECKED_PREF_KEY = "checked";
+
 
 
     @Override
@@ -34,7 +33,7 @@ public class SharedPreferenceActivity extends AppCompatActivity {
         String email = this.binding.etSharedEmail.getText().toString();
         String password = this.binding.etSharedPassword.getText().toString();
         boolean isChecked = this.binding.cbSharedRemenberMe.isChecked();
-        if(email==null || email.isEmpty() || password==null || password.isEmpty() ) {
+        if(email.isEmpty() || password.isEmpty()) {
             Toast.makeText(this,"You must fill both email and password",Toast.LENGTH_SHORT).show();
         }else {
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
