@@ -15,14 +15,15 @@ import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.IOException;
 import java.util.List;
 
 import be.bf.android.demoapp.R;
 import be.bf.android.demoapp.configs.Config;
 import be.bf.android.demoapp.databinding.ActivityPersistenceBinding;
-import be.bf.android.demoapp.persistence.DAO.UserDAO;
+
+import be.bf.android.demoapp.persistence.dal.UserDAO;
 import be.bf.android.demoapp.persistence.entities.User;
-import be.bf.android.demoapp.persistence.threads.DatabaseThread;
 import io.reactivex.rxjava3.core.Single;
 
 import static be.bf.android.demoapp.configs.Config.DBLite;
@@ -30,7 +31,7 @@ import static be.bf.android.demoapp.configs.Config.DBLite;
 public class PersistenceActivity extends AppCompatActivity {
 
     ActivityPersistenceBinding binding;
-    private AppDatabase appDB;
+    //private AppDatabase appDB;
 
 
     @Override
@@ -38,30 +39,33 @@ public class PersistenceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityPersistenceBinding.inflate(getLayoutInflater());
         setContentView(this.binding.getRoot());
-
-//        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-//        pref.edit()
-//                .putBoolean("connected",true)
-//                .putString("username","Romain")
-//                .apply();
-
         binding.btnPersistenceSharedPref.setOnClickListener(this::onSharedPrefAction);
         binding.btnPersistenceFile.setOnClickListener(this::onFileAction);
 
+
+        try (UserDAO dao = new UserDAO(this)) {
+            dao.openWritable();
+            //dao.insert(new User(binding.email.getText().toString(), binding.password.getText().toString()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
         //getApplicationContext().getApplicationContext().deleteDatabase(DBLite.DB_NAME);
-        this.appDB = Room.databaseBuilder(getApplicationContext(),AppDatabase.class, DBLite.DB_NAME).build();
-        UserDAO userDAO = this.appDB.userDAO();
-        User user = new User("Romain","Vandemale");
-        userDAO.insertAll(user);
 
-        //DatabaseThread thread = new DatabaseThread();
-        //thread.setDao(userDAO);
-        //thread.start();
-
-        //userDAO.insertAll(user);
-        Single<List<User>> users = userDAO.getAll();
-        List<User> userlist = users.blockingGet();
-        Log.d("YEP", String.valueOf(userlist.size()));
+//        this.appDB = Room.databaseBuilder(getApplicationContext(),AppDatabase.class, DBLite.DB_NAME).build();
+//        UserDAO userDAO = this.appDB.userDAO();
+//        User user = new User("Romain","Vandemale");
+//        userDAO.insertAll(user);
+//
+//        //DatabaseThread thread = new DatabaseThread();
+//        //thread.setDao(userDAO);
+//        //thread.start();
+//
+//        //userDAO.insertAll(user);
+//        Single<List<User>> users = userDAO.getAll();
+//        List<User> userlist = users.blockingGet();
+//        Log.d("YEP", String.valueOf(userlist.size()));
 
     }
 
@@ -72,8 +76,8 @@ public class PersistenceActivity extends AppCompatActivity {
         super.onResume();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String message = "email : " + preferences.getString(Config.Preferences.EMAIL_PREF_KEY,"you@home.be") + "\n password : " + preferences.getString(Config.Preferences.PASSWORD_PREF_KEY,"password") + "\nchecked : " + preferences.getBoolean(Config.Preferences.CHECKED_PREF_KEY,false);
-        Snackbar.make(binding.layoutPersistence,message, Snackbar.LENGTH_SHORT).show();
-        //Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
+        //Snackbar.make(binding.layoutPersistence,message, Snackbar.LENGTH_SHORT).show();
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
     }
 
     private void onFileAction(View view) {

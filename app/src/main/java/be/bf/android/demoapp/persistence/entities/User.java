@@ -1,52 +1,55 @@
 package be.bf.android.demoapp.persistence.entities;
 
-import android.graphics.Bitmap;
+import java.util.Objects;
 
-import androidx.room.*;
+// Biblio : autheurs, livres, emprunt
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-
-@Entity
 public class User {
-    @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "user_id")
-    public int uid;
+    private String username;
+    private String password;
 
-    @ColumnInfo(name = "first_name")
-    public String firstName;
+    public User() {}
 
-    @ColumnInfo(name = "last_name")
-    public String lastName;
-    @Ignore
-    Bitmap picture;
-
-    public User() {};
-
-    public User(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
-    public int getUid() {
-        return uid;
+    public String getUsername() {
+        return username;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public String getPassword() {
+        return password;
     }
 
-    public String getLastName() {
-        return lastName;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("User{");
+        sb.append("username='").append(username).append('\'');
+        sb.append(", password='").append(password).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(username, user.username) && Objects.equals(password, user.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(username, password);
     }
 }
