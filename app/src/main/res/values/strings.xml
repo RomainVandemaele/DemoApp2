@@ -16,4 +16,19 @@
     <string name="btn_choiceButton_cancel">Cancel</string>
     <string name="main_displayExtra">Extra</string>
     <string name="main_extra">EXTRA</string>
+    <string name="call">Call</string>
+    <string name="search">search</string>
+    <string name="pesistence">Persistence</string>
+    <string name="sharedpref">Shared pref</string>
+    <string name="file">File</string>
+    <string name="tv_username">username</string>
+    <string name="remenberMe">Remenber me ?</string>
+    <string name="tv_password">password</string>
+    <string name="tv_email">email</string>
+
+    <string name="persistence.rememberMe">remember me</string>
+    <string name="tv_texte">text</string>
+    <string name="save_text">Save</string>
+    <string name="display_text">Display</string>
+    <string name="delete_text">Delete</string>
 </resources>

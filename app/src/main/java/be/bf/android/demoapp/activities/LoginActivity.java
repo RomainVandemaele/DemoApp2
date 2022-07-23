@@ -47,6 +47,12 @@ public class LoginActivity extends AppCompatActivity {
 
         this.binding.buttonRegisterReset.setOnClickListener(this::reset);
         this.binding.buttonRegisterLogin.setOnClickListener(this::login);
+
+        Bundle extra = this.getIntent().getExtras();
+        if (extra!=null){
+            binding.textEditUsername.setText(extra.getString("username"));
+            binding.textEditPassword.setText(extra.getString("password"));
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
